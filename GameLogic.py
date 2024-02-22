@@ -9,7 +9,8 @@ class Book:
 books_db = [
     Book("Book1", "Author A", "Genre X", 2001),
     Book("Book2", "Author B", "Genre Y", 2005), # No Matching properties
-    Book("Book3", "Author A", "Genre Y", 2005), # 1 Matching properties
+    Book("Book3", "Author A", "Genre Y", 2005), # 1 Matching property
+    Book("Book4", "Author A", "Genre X", 2005), # 2Book Matching properties
     # Add more books as needed
 ]
 
@@ -29,7 +30,7 @@ def guess_book(guess_title):
         return False, None
 
 def start_game():
-    max_guesses = 10
+    max_guesses = 3
     guess_count = 0
     
     while guess_count < max_guesses:
