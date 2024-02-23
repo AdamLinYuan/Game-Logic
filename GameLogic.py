@@ -46,11 +46,11 @@ def guess_book(guess_title):
         feedback["author"] = guessed_book.author == target_book.author
         feedback["genre"] = guessed_book.genre == target_book.genre
         feedback["release_year"] = guessed_book.release_year == target_book.release_year
-        return True, feedback
+        return True, feedback, guessed_book
     else:
         # If not found, suggest the closest book titles
         closest_titles = find_closest_titles(guess_title)
-        return False, closest_titles
+        return False, closest_titles, guessed_book
     
 def start_game():
     max_guesses = 3
@@ -58,7 +58,7 @@ def start_game():
     
     while guess_count < max_guesses:
         user_guess = input("Guess the book title: ")
-        found, result = guess_book(user_guess)
+        found, result, guessed_book = guess_book(user_guess)
         
         if not found:
             print(f"The book is not in our database. Did you mean '{result}'? Try again.")
@@ -70,11 +70,12 @@ def start_game():
             break
         else:
             print("Feedback on your guess:", result)
+            print("Author: ", guessed_book.author, result["author"], "Genre: ", guessed_book.genre, result["genre"], "Release Year: ", guessed_book.release_year, result["release_year"])
         
         if guess_count == max_guesses:
             print(f"Sorry, you've reached the maximum number of guesses. The correct book was '{target_book.title}'.")
 
 # Define the target book for the game
-target_book = books_db[1]
+target_book = books_db[10]
 
 start_game()
